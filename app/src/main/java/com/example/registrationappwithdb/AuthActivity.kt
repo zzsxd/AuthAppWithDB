@@ -10,50 +10,49 @@ import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
-import org.w3c.dom.Text
 
-class MainActivity : AppCompatActivity() {
+class AuthActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
-        setContentView(R.layout.activity_main)
+        setContentView(R.layout.activity_auth)
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
-        val userLogin: EditText = findViewById(R.id.user_login)
-        val userEmail: EditText = findViewById(R.id.user_email)
-        val userPassword: EditText = findViewById(R.id.user_password)
-        val button: Button = findViewById(R.id.registration_button)
-        val linkToAuth: TextView = findViewById(R.id.link_to_auth)
+        val userLogin: EditText = findViewById(R.id.user_login_auth)
+        val userPassword: EditText = findViewById(R.id.user_password_auth)
+        val button: Button = findViewById(R.id.auth_button)
+        val linkToReg: TextView = findViewById(R.id.link_to_reg)
 
-        linkToAuth.setOnClickListener {
-            val intent = Intent(this, AuthActivity::class.java)
+        linkToReg.setOnClickListener {
+            val intent = Intent(this, MainActivity::class.java)
             startActivity(intent)
         }
 
         button.setOnClickListener {
             val login = userLogin.text.toString().trim()
-            val email = userEmail.text.toString().trim()
             val pass = userPassword.text.toString().trim()
 
-            if (login == "" || email == "" || pass == "") {
+            if (login == "" || pass == "") {
                 Toast.makeText(this, "Заполните поля!", Toast.LENGTH_LONG).show()
-            }
-            else {
-                val user = User(login, email, pass)
+            } else {
 
                 val db = DbHelper(this, null)
-                db.dbWrite(user)
-                Toast.makeText(this, "Пользователь $login добавлен!", Toast.LENGTH_LONG).show()
+                val isAuth = db.dbRead(login, pass)
+                if (isAuth) {
+                    Toast.makeText(this, "Вы успешно авторизовались!", Toast.LENGTH_LONG).show()
+                }
+                else {
+                    Toast.makeText(this, "Неверные данные!", Toast.LENGTH_LONG).show()
+                }
 
                 userLogin.text.clear()
-                userEmail.text.clear()
                 userPassword.text.clear()
 
             }
-
         }
+
     }
 }

@@ -7,7 +7,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:background="#201E28"
-    tools:context=".MainActivity">
+    tools:context=".AuthActivity">
 
     <TextView
         android:id="@+id/fontfamily"
@@ -16,13 +16,13 @@
         android:layout_gravity="center"
         android:layout_marginTop="170dp"
         android:fontFamily="@font/inter_semibold"
-        android:text="Создайте аккаунт"
+        android:text="Авторизация"
         android:textColor="#fdfdfd"
         android:textSize="10pt"
         android:textStyle="bold" />
 
     <EditText
-        android:id="@+id/user_login"
+        android:id="@+id/user_login_auth"
         android:layout_width="300dp"
         android:layout_height="50dp"
         android:ems="10"
@@ -34,19 +34,7 @@
         android:hint="Введите логин" />
 
     <EditText
-        android:id="@+id/user_email"
-        android:layout_width="300dp"
-        android:layout_height="50dp"
-        android:ems="10"
-        android:inputType="text"
-        android:textColorHint="#6a6a6a"
-        android:layout_marginTop="20dp"
-        android:layout_gravity="center"
-        android:textColor="#fdfdfd"
-        android:hint="Введите email" />
-
-    <EditText
-        android:id="@+id/user_password"
+        android:id="@+id/user_password_auth"
         android:layout_width="300dp"
         android:layout_height="50dp"
         android:ems="10"
@@ -58,22 +46,23 @@
         android:hint="Введите пароль" />
 
     <Button
-        android:id="@+id/registration_button"
+        android:id="@+id/auth_button"
         android:layout_marginTop="15dp"
         android:layout_width="300dp"
         android:layout_height="50dp"
         android:layout_gravity="center"
-        android:text="Зарегестрироваться" />
+        android:text="Войти" />
 
     <TextView
-        android:id="@+id/link_to_auth"
+        android:id="@+id/link_to_reg"
         android:layout_width="wrap_content"
         android:layout_height="20dp"
         android:layout_gravity="center"
         android:layout_marginTop="10dp"
         android:fontFamily="@font/inter_semibold"
-        android:text="или войдите"
+        android:text="или зарегестрируйтесь"
         android:textColor="#fdfdfd"
-        android:textSize="15sp" />
+        android:textSize="15sp"
+        tools:ignore="DuplicateIds" />
 
 </LinearLayout>
